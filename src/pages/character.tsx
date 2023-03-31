@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useCharacterQuoteQuery } from '../../Hooks/useQuoteQuery';
 import useCharacterQuery from '../../Hooks/useCharacterQuery';
-import { Image, Box, Button, Container, Flex, Heading, Input, ListItem, OrderedList } from '@chakra-ui/react'
+import { Image, Box, Button, Container, Flex, Heading, Input, ListItem, OrderedList, Divider } from '@chakra-ui/react'
 
 export default function Character() {
 
@@ -37,10 +37,12 @@ export default function Character() {
                         )
                     )}
 
-                    {isQuoteLoading ? <h1>Loading Quotes</h1> : (
+                    <Divider my='5' />
+
+                    <Heading mb='5'> Said </Heading>
+                    {isQuoteLoading ? <h1>Loading sayings</h1> : (
                         quotes ? (
                             <Box>
-                                <Heading my='5'> Quotes </Heading>
                                 <OrderedList>
                                     {quotes.map((quote, index) => (
                                         <ListItem key={index}>{quote.character}: {quote.quote}</ListItem>

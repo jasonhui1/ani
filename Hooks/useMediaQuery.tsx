@@ -1,5 +1,21 @@
 import { useState, useEffect } from 'react'
 
+export interface AnimeData {
+  id: number
+  title: {
+    english: string
+    native: string
+  }
+  description:string
+  coverImage: {
+    extraLarge: string
+  }
+  trailer: {
+    id:string
+    site:string
+  }
+}
+
 const query = `
   query ($search: String) { # Define which variables will be used in the query (id)
     Media (search: $search, type: ANIME) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)
@@ -9,8 +25,13 @@ const query = `
         english
         native
       }
+      description
       coverImage {
           extraLarge
+      }
+      trailer {
+        id
+        site
       }
     }
   }
@@ -36,16 +57,7 @@ const options = (variables: OptionVariables) => {
   }
 };
 
-export interface AnimeData {
-  id: number
-  title: {
-    english: string
-    native: string
-  }
-  coverImage: {
-    extraLarge: string
-  }
-}
+
 
 
 export default function useMediaQuery(search: string): [AnimeData | undefined, boolean] {
